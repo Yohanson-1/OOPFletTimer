@@ -22,16 +22,16 @@ def main(page: ft.Page):
     base_elapsed = 0
     started_at = 0.0
 
+
+
     def sync_ui():
         nonlocal elapsed
         timer.value = format_hhmmss(elapsed)
 
         if running and not paused:
-            toggle_btn.text = "Pause"
-            toggle_btn.icon = ft.Icons.PAUSE
+            toggle_btn.icon = ft.Icons.PAUSE_CIRCLE_FILLED_ROUNDED
         else:
-            toggle_btn.text = "Start"
-            toggle_btn.icon = ft.Icons.PLAY_ARROW
+            toggle_btn.icon = ft.Icons.PLAY_ARROW_ROUNDED
 
         stop_btn.disabled = (not running) and (elapsed == 0)
 
@@ -89,14 +89,22 @@ def main(page: ft.Page):
                         controls=[
                             toggle_btn := ft.FilledButton(
                                 "Start",
-                                icon=ft.Icons.PLAY_ARROW,
+                                icon=ft.Icons.PLAY_ARROW_ROUNDED,
                                 on_click=handle_toggle,
+                                style=ft.ButtonStyle(
+                                    shape=ft.RoundedRectangleBorder(radius=8),
+                                    padding=15
+                                )
                             ),
                             stop_btn := ft.TextButton(
                                 "Stop",
-                                icon=ft.Icons.STOP,
+                                icon=ft.Icons.STOP_CIRCLE_ROUNDED,
                                 disabled=True,
                                 on_click=handle_stop,
+                                style=ft.ButtonStyle(
+                                    shape=ft.StadiumBorder(),
+                                    padding=15
+                                )
                             ),
                         ],
                     ),
@@ -106,6 +114,9 @@ def main(page: ft.Page):
     )
 
     sync_ui()
+
+
+
 
 
 if __name__ == "__main__":
